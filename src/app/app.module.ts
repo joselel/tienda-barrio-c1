@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
@@ -38,6 +41,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryCardComponent } from './components/category-card/category-card.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
@@ -56,7 +60,8 @@ import { CategoryCardComponent } from './components/category-card/category-card.
     ProfileComponent,
     OrdersComponent,
     CategoriesComponent,
-    CategoryCardComponent
+    CategoryCardComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -76,7 +81,11 @@ import { CategoryCardComponent } from './components/category-card/category-card.
     MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatPaginatorModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
