@@ -2,7 +2,7 @@
 	<form class="col-md-6 m-auto d-flex">
 		<mat-form-field class="w-100" appearance="fill">
 			<mat-label>Buscar un producto</mat-label>
-			<input matInput placeholder="Escribe el nombre del producto">
+			<input  [formControl]="search" autocomplete="off" matInput placeholder="Escribe el nombre del producto">
 		</mat-form-field>
 		<mat-icon class="w-9 mt-3 ml-5">search</mat-icon>		
 	</form>
