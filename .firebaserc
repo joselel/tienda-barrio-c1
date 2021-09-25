@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tienda-barrio-68bad": {
+      "hosting": {
+        "tienda-barrio": [
+          "tienda-barrio-68bad"
+        ]
+      }
+    }
+  }
+}

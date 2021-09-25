@@ -1,16 +1,30 @@
-<div class="container mt-2 mb-3 sticky-top shadow-lg bg-primary">
-	<mat-toolbar color="primary">
-		<div fxHide.gt-xs>
+<div class="container  container-fluid mt-2 mb-3 sticky-top">
+	<mat-toolbar class="" class="rounded-pill" color="primary">
+
+		<div class="col-md-2" fxHide.gt-xs class="col">
 			<button mat-icon-button (click)="onToggleSidenav()">
 				<mat-icon>menu</mat-icon>
 			</button>
 		</div>
-		<div>
-			<a mat-icon-button  matBadge="15" matBadgeColor="warn" matBadgeOverlap="true" [routerLink]="['tutoriales']" routerLinkActive="active-link"> | <mat-icon>shopping_cart</mat-icon></a>
+
+		<div class="col-md-1 m-2">
+			<a mat-icon-button matBadge="15" matBadgeColor="warn" matBadgeOverlap="true" [routerLink]="['carrito-de-compras']"
+				routerLinkActive="active-link">
+				<mat-icon>shopping_cart</mat-icon>
+			</a>
 		</div>
-		<div>
-			<a mat-icon-button matBadge="Q15" matBadgeColor="warn" matBadgeOverlap="true" [routerLink]="['tutoriales']"
-				routerLinkActive="active-link"> | <mat-icon>payments</mat-icon></a>
+
+		<div *ngIf="!auth.usuario.name" class="col-md-1 m-2">
+			<a (click)="login()" mat-icon-button [routerLink]="['tutoriales']" routerLinkActive="active-link">
+				<mat-icon>person_outline</mat-icon>
+			</a>
 		</div>
+
+		<div *ngIf="auth.usuario.name" class="col-md-1 m-2">
+			<a>
+				<img width="40" src="{{auth.usuario.photo}}" class="rounded-circle" alt="photo-profile-google">
+			</a>
+		</div>
+
 	</mat-toolbar>
 </div>

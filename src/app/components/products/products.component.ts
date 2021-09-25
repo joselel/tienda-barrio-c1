@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild,EventEmitter } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ProductService } from 'src/app/services/product.service';
-import { Observable } from 'rxjs';
-import { MatPaginator } from '@angular/material/paginator';
+import { CartShoppingService } from 'src/app/services/cart-shopping.service';
+import { product } from 'src/app/models/product'
 
 @Component({
   selector: 'app-products',
@@ -13,14 +13,14 @@ import { MatPaginator } from '@angular/material/paginator';
 export class ProductsComponent implements OnInit {
 
   load: boolean; 
-  items!: Observable<any[]>;
   products: any[] = [];
   filtro_valor = '';
   pageActual: number = 1;
 
   constructor(
     private firestore: AngularFirestore,
-    private  _productsService: ProductService) {
+    private  _productsService: ProductService,
+    private _cartService: CartShoppingService) {
     this.load = true;
   }
 
@@ -28,10 +28,10 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
   }
 
-  getAllProducts() {
-    this._productsService.getProducts().subscribe(data => {
-      data.forEach((element: any) => {
-        this.products.push({
+  async getAllProducts() {
+     this._productsService.getProducts().subscribe(data => {
+        data.forEach((element: any) => {
+          this.products.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })
@@ -40,11 +40,9 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  addCart(product:any) 
+  addCart(product:product) 
   {
-    // Guardo el objeto como un string
-    localStorage.setItem('producto', JSON.stringify(product));
-
+    this._cartService.addProductCartShopping(product,1);
   }
 
   viewProduct(product:any) {

@@ -4,7 +4,7 @@
 <mat-spinner *ngIf="load" class="m-auto mb-2"></mat-spinner>
 
 	<div *ngIf="!load" class="row">
-		<div *ngFor="let item of products | search:filtro_valor | paginate: { itemsPerPage: 25, currentPage: pageActual }" class="col-md-3">
+		<div *ngFor="let item of products | search:filtro_valor | paginate: { itemsPerPage: 25, currentPage: pageActual}" class="col-md-3">
 			<div class="card p-1 mt-2 mb-2 shadow-lg" style="width: 14rem;">
 				<div class="card-header">
 					<h2 class="card-title text-center">{{item.name}}</h2>

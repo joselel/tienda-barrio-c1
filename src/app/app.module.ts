@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,13 +19,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
+import { USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
+import { PERSISTENCE } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
+
 
 import { HeaderComponent } from './components/share/header/header.component';
 import { NavbarComponent } from './components/share/navbar/navbar.component';
@@ -42,7 +48,6 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { SearchPipe } from './pipes/search.pipe';
-
 
 @NgModule({
   declarations: [
@@ -85,9 +90,15 @@ import { SearchPipe } from './pipes/search.pipe';
     ReactiveFormsModule,
     FormsModule,
     MatPaginatorModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatTableModule,
+    SweetAlert2Module.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },
+    { provide: USE_DEVICE_LANGUAGE, useValue: true },
+    { provide: PERSISTENCE, useValue: 'session' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

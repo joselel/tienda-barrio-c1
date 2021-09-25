@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ export class HeaderComponent implements OnInit {
 
   hidden = false;
   
-  constructor() { }
+  constructor(
+    public auth: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -19,8 +22,15 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
+  login() {
+    this.auth.login();
+  }
+
+  logout() {this.auth.logout()}
+
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
   }
 
+  
 }
