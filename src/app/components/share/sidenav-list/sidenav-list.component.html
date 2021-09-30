@@ -16,16 +16,14 @@
 		routerLink="/mis-pedidos" 
 		(click)="onSidenavClose()">
 		<mat-icon>list_alt</mat-icon> 
-		<span matBadge="1" 
-		matBadgeOverlap="false" 
-		matBadgeColor="warn" 
+		<span 
 		class="nav-caption"> Mis pedidos</span>
 	</a>
 
 	<a mat-list-item routerLink="/carrito-de-compras" 
 		(click)="onSidenavClose()">
 		<mat-icon>shopping_cart</mat-icon> 
-		<span   matBadge="15" 
+		<span   matBadge="{{cantidad}}" 
 				matBadgeOverlap="false" 
 				matBadgeColor="warn" 
 				class="nav-caption"> Carrito de compras</span>
@@ -40,13 +38,13 @@
 		<span class="nav-caption"> Iniciar Sesión</span>
 	</a>
 
-	<a mat-list-item 
+	<!-- <a mat-list-item 
 		*ngIf="auth.usuario.name"
 		routerLink="/perfil" 
 		(click)="onSidenavClose()">
 		<mat-icon>manage_accounts</mat-icon> 
 		<span class="nav-caption"> Mi perfil</span>
-	</a>
+	</a> -->
 
 	<a mat-list-item 
 		*ngIf="auth.usuario.name"

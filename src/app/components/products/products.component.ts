@@ -51,7 +51,6 @@ export class ProductsComponent implements OnInit {
 
     handleSearch(value:string) {
     this.filtro_valor = value;
-    console.log(this.filtro_valor);
   }
 
 }

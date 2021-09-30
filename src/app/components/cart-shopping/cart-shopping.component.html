@@ -2,49 +2,68 @@
 
 <h1 class="text-center">Carrito de compras</h1>
 <hr>
-
-<button
+<div class="row">
+  <button
   *ngIf="products.length > 1"
-  class="text-center btn btn-warning"
+  class="text-center btn btn-danger mb-4 col-md-12"
   [swal]="{ title: '¿Quieres eliminar todo?', showCancelButton: true }"
   (confirm)="deleteAllProductList()">
   Eliminar todo
-</button>
+  </button>
+</div>
 
-<table *ngIf="products.length > 0" class="table">
-    <thead>
-      <tr>
-        <th scope="col">No.</th>
-        <th scope="col">Producto</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Unidades</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let item of this.products;let i = index">
-        <th  scope="row">{{i+1}}</th>
-        <td>{{item.name}}</td>
-        <td>Q {{item.price_sale.toFixed(2)}}</td>
-        <td>
-            <img width="85" height="70" class="" src="{{item.image}}" alt="image_product">
-        </td>
-        <td>
-            <a mat-list-item class="btn btn-danger rounded-circle text-center   "
-               (click)="deleteOneProductList(item)">
-                <mat-icon class="">
-                    delete_outline
-                </mat-icon> 
+<div *ngFor="let item of this.products;let i = index" class="row shadow-lg bg-body m-2 text-center border-0 ">
+  <div class="d-flex">
+    <div class="flex-shrink-0">
+      <img width="120" height="110" class="rounded-circle border border-primary" src="{{item.product.image}}" alt="Error al cargar">
+    </div>
+    <div class=" row flex-grow-1 ms-3">
+        <div class="col-md-3 p-md-4"><h1>{{item.product.name}}</h1></div>
+        <div class="col-md-2 p-md-4"><h2>{{"Q " + item.product.price_sale.toFixed(2)}}</h2></div>
+        <div class="col-md-3 p-md-4 d-flex justify-content-evenly">
+            <a mat-mini-fab color="primary"
+            (click)="addOneUnit(item)">
+              <mat-icon>add</mat-icon>
             </a>
-        </td>
-      </tr>
-      
-    </tbody>
-  </table>
+          <h2 class="m-3">{{item.unit}}</h2>
+          <a mat-mini-fab color="primary"
+          (click)="removeOneUnit(item)">
+          <mat-icon class="">
+              remove_one
+          </mat-icon> 
+          </a>
+        </div>
+        <div class="col-md-3 p-4 d-flex justify-content-evenly mb-4">
+          <a mat-mini-fab color="warn"
+            (click)="deleteOneProductList(item)">
+            <mat-icon>
+                delete_outline
+            </mat-icon> 
+          </a>
+        </div>  
+        <div class="col-md-3 p-4 d-flex justify-content-evenly mb-4">
+          <h3>Subtotal: {{"Q " + item.subtotal.toFixed(2)}}</h3>
+        </div> 
+
+    </div>
+  </div>
+</div>
+
+  <div *ngIf="products.length > 0" class="row shadow-lg p-2 text-center">
+    <h1>El total es de Q {{this.total.toFixed(2)}}</h1>
+
+    <button
+    
+    class="text-center btn btn-primary mb-4 col-md-12"
+    [swal]="{ title: '¿Quieres eliminar todo?', showCancelButton: true }"
+    (confirm)="deleteAllProductList()">
+    Realizar pedido
+    </button>
+  </div>
 
   <div *ngIf="products.length == 0" class="container text-center m-4"> 
     <h1>Aun no tienes productos</h1>
+    <a class="btn btn-primary" [routerLink]="['/inicio']" routerLinkActive="router-link-active" >Comprar ahora</a>
     <img class="img-fluid" src="https://eltrebolpremiumstore.com.ar/images/icons/cart-empty.png" alt="">
   </div>
 
