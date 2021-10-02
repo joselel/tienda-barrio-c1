@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
     this._cartService.total.subscribe(total =>{
       this.total = total;
     })
+    this._cartService.getTotal();
   }
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();

@@ -50,13 +50,12 @@
 </div>
 
   <div *ngIf="products.length > 0" class="row shadow-lg p-2 text-center">
-    <h1>El total es de Q {{this.total.toFixed(2)}}</h1>
 
     <button
     
     class="text-center btn btn-primary mb-4 col-md-12"
-    [swal]="{ title: '¿Quieres eliminar todo?', showCancelButton: true }"
-    (confirm)="deleteAllProductList()">
+    [swal]="{ title: '¿Desear realizar el pedido?', showCancelButton: true }"
+    (confirm)="postOrder(this.products)">
     Realizar pedido
     </button>
   </div>

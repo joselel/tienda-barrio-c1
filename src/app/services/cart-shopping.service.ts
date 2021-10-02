@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +62,7 @@ export class CartShoppingService {
       this.Listproducts.push(item);
       localStorage.setItem(this.key, JSON.stringify(this.Listproducts));
       this.contador.emit(this.Listproducts.length);
-      this.getTotal(this.Listproducts);
+      this.getTotal();
       this.successNotification("Añadiste "+item.product.name + " al carrito");
     }else{
       this.Listproducts = JSON.parse(Listproducts);
@@ -71,15 +71,16 @@ export class CartShoppingService {
             if(existe){
               existe.unit += item.unit;  
               existe.subtotal = existe.unit * item.product.price_sale;
-              this.getTotal(this.Listproducts);
+              this.contador.emit(this.Listproducts.length);
               localStorage.setItem(this.key, JSON.stringify(this.Listproducts));
+              this.getTotal();
               this.successNotification("Añadiste una unidad mas de "+item.product.name + " al carrito");
               
             }else{
             this.Listproducts.push(item);
             this.contador.emit(this.Listproducts.length);
-            this.getTotal(this.Listproducts);
             localStorage.setItem(this.key, JSON.stringify(this.Listproducts));
+            this.getTotal();
             this.successNotification("Añadiste "+item.product.name + " al carrito");
             
             }
@@ -94,6 +95,7 @@ export class CartShoppingService {
       this.Listproducts = []
     }else{
       this.Listproducts = JSON.parse(Listproducts);
+      this.contador.emit(this.Listproducts.length);
     }
     return this.Listproducts;
   }
@@ -125,11 +127,15 @@ export class CartShoppingService {
     Swal.fire({
       title: 'Listo!',
       text: mensaje,
-      icon:'success'
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 700
     })
   }
 
-  getTotal(products:any){
+  getTotal(){
+   const products = this.getProductCartShopping();
+
     this.totalS = 0;
     for(let i = 0; i < products.length; i++){
       this.totalS += products[i].subtotal;

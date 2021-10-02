@@ -4,41 +4,41 @@
 <mat-spinner *ngIf="load" class="m-auto mb-2"></mat-spinner>
 
 	<div *ngIf="!load" class="row">
-		<div *ngFor="let item of products | search:filtro_valor | paginate: { itemsPerPage: 25, currentPage: pageActual}" class="col-md-3">
-			<div class="card p-1 mt-2 mb-2 shadow-lg" style="width: 14rem;">
+		<div *ngFor="let item of products | search:filtro_valor | paginate: { itemsPerPage: 25, currentPage: pageActual}" class="col-md-3 d-flex justify-content-evenly">
+			<div class="card mt-2 mb-2 shadow-lg">
 				<div class="card-header">
 					<h2 class="card-title text-center">{{item.name}}</h2>
 				</div>
-		
-				<img src="{{item.image}}" class="card-img-fluid"
+
+				<img *ngIf="item.image" 
+					src="{{item.image}}" 
+					class="card-img-fluid"
 					alt="IMG-Producto">
+
 				<div class="card-body text-center">
 					<p class="card-text"><b>Q{{item.price_sale.toFixed(2)}}</b></p>
 				</div>
 		
-				<div class="text-center">
+				<div class="text-center mb-3">
 					<button 
-						matTooltip="Ver producto" 
-						type="button" 
-						class="btn btn-primary"
-						(click)="viewProduct(item)">
-						<mat-icon>visibility</mat-icon>
-					</button>
-
-					<button 
+						mat-fab color="primary"
 						matTooltip="agregar producto al carrito" 
 						type="button"
-						class="btn btn-warning ml-2"
 						(click)="addCart(item)">
 						<mat-icon>add_shopping_cart</mat-icon>
-					</button>
+					  </button>
 				</div>
 				<div class="card-footer text-center">
-					<i>vence en {{item.expiration_date.toDate () | date: 'dd MMM yyyy'}}</i>
+					<span>
+						<i>vence en {{item.expiration_date.toDate () | date: 'dd MMM yyyy'}}</i></span>
 				</div>
 			</div>
 		</div>
-		<pagination-controls class="text-center" (pageChange)="pageActual = $event" previousLabel="Anterior"
-			nextLabel="Siguiente"></pagination-controls>
+		<pagination-controls 
+			class="text-center" 
+			(pageChange)="pageActual = $event" 
+			previousLabel="Anterior"
+			nextLabel="Siguiente">
+		</pagination-controls>
 
 	</div>
