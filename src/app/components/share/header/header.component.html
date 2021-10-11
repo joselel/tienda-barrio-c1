@@ -21,15 +21,15 @@
 			</a>
 		</div>
 
-		<div *ngIf="!auth.usuario.name" class="col-md-1 m-2">
+		<div *ngIf="!auth.user.name" class="col-md-1 m-2">
 			<a (click)="login()" mat-icon-button [routerLink]="['tutoriales']" routerLinkActive="active-link">
 				<mat-icon>person_outline</mat-icon>
 			</a>
 		</div>
 
-		<div *ngIf="auth.usuario.name" class="col-md-1 m-2">
+		<div *ngIf="auth.user.name" class="col-md-1 m-2">
 			<a>
-				<img width="40" src="{{auth.usuario.photo}}" class="rounded-circle" alt="photo-profile-google">
+				<img width="40" src="{{auth.user.photo}}" class="rounded-circle" alt="photo-profile-google">
 			</a>
 		</div>
 

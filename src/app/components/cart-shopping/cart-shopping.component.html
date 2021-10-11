@@ -24,8 +24,8 @@
             <a mat-fab color="primary"
             (click)="addOneUnit(item)">
               <mat-icon>add</mat-icon>
-            </a>    
-                   
+            </a>
+
 
             <h2 class="m-3">{{item.unit}}</h2>
 
@@ -33,7 +33,7 @@
             (click)="removeOneUnit(item)">
             <mat-icon class="">
               remove_one
-            </mat-icon> 
+            </mat-icon>
             </a>
 
         </div>
@@ -42,7 +42,7 @@
             (click)="deleteOneProductList(item)">
             <mat-icon>
                 delete_outline
-            </mat-icon> 
+            </mat-icon>
           </a>
         </div>
         <div class="row text-center mt-2">
@@ -54,15 +54,20 @@
   <div *ngIf="products.length > 0" class="row shadow-lg p-2 text-center">
 
     <button
-    
+
     class="text-center btn btn-primary mb-4 col-md-12"
-    [swal]="{ title: '¿Desear realizar el pedido?', showCancelButton: true }"
-    (confirm)="postOrder(this.products)">
+    [swal]="{
+      title: '¿Desear realizar el pedido?',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar' }"
+      (confirm)="postOrder(this.products)">
     Realizar pedido
     </button>
   </div>
 
-  <div *ngIf="products.length == 0" class="container text-center m-4"> 
+  <div *ngIf="products.length == 0" class="container text-center m-4">
     <h1>Aun no tienes productos</h1>
     <a class="btn btn-primary" [routerLink]="['/inicio']" routerLinkActive="router-link-active" >Comprar ahora</a>
     <img class="img-fluid" src="https://eltrebolpremiumstore.com.ar/images/icons/cart-empty.png" alt="">

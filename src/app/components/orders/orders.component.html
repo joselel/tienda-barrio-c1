@@ -1,1 +1,39 @@
-<p>orders works!</p>
+
+<div class="row">
+
+  <div  *ngFor="let item of this.orders | paginate: { itemsPerPage: 15, currentPage: pageActual} ;let i = index" class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center">
+          Direccion de envio:
+          {{item.Direccion}} |
+          Estado:
+          <span *ngIf ="item.estado == 'Recibido'"
+          class="badge badge-secondary bg-primary">
+          {{item.estado}}
+        </span>
+        <span *ngIf ="item.estado == 'En proceso'"
+          class="badge badge-secondary text-dark bg-warning">
+          {{item.estado}}
+        </span>
+        <span *ngIf ="item.estado == 'Entregado'"
+          class="badge badge-secondary bg-success">
+          {{item.estado}}
+        </span>
+      </h5>
+        <p>Productos:</p>
+        <div *ngFor="let item of this.item.products;let i = index" class="card-text">
+          <h5><span class="badge badge-secondary bg-primary">{{item.unit}}</span> {{item.product.name}}( Q{{item.product.price_sale.toFixed(2)}}) = Q {{item.subtotal.toFixed(2)}}</h5>
+        </div>
+        <p class="btn btn-primary">Total: Q.{{item.total.toFixed(2)}}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<pagination-controls
+			class="text-center"
+			(pageChange)="pageActual = $event"
+			previousLabel="Anterior"
+			nextLabel="Siguiente">
+		</pagination-controls>

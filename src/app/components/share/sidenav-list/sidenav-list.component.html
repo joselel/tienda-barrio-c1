@@ -1,57 +1,57 @@
 
 <mat-nav-list>
-	<a mat-list-item routerLink="/inicio" 
+	<a mat-list-item routerLink="/inicio"
 		(click)="onSidenavClose()">
-		<mat-icon>home</mat-icon> 
+		<mat-icon>home</mat-icon>
 		<span class="nav-caption"> Inicio</span>
 	</a>
 
-	<a mat-list-item routerLink="/categorias" 
+	<a mat-list-item routerLink="/categorias"
 		(click)="onSidenavClose()">
-		<mat-icon>category</mat-icon> 
+		<mat-icon>category</mat-icon>
 		<span class="nav-caption"> Categorias</span>
 	</a>
-	<a mat-list-item 
-		*ngIf="auth.usuario.name"
-		routerLink="/mis-pedidos" 
+	<a mat-list-item
+		*ngIf="auth.user.name"
+		routerLink="/mis-pedidos"
 		(click)="onSidenavClose()">
-		<mat-icon>list_alt</mat-icon> 
-		<span 
+		<mat-icon>list_alt</mat-icon>
+		<span
 		class="nav-caption"> Mis pedidos</span>
 	</a>
 
-	<a mat-list-item routerLink="/carrito-de-compras" 
+	<a mat-list-item routerLink="/carrito-de-compras"
 		(click)="onSidenavClose()">
-		<mat-icon>shopping_cart</mat-icon> 
-		<span   matBadge="{{cantidad}}" 
-				matBadgeOverlap="false" 
-				matBadgeColor="warn" 
+		<mat-icon>shopping_cart</mat-icon>
+		<span   matBadge="{{cantidad}}"
+				matBadgeOverlap="false"
+				matBadgeColor="warn"
 				class="nav-caption"> Carrito de compras</span>
 	</a>
 
-	<a mat-list-item 
-		*ngIf="!auth.usuario.name"
-		routerLink="/inicio" 
+	<a mat-list-item
+		*ngIf="!auth.user.name"
+		routerLink="/inicio"
 		(click)="login()"
 		(click)="onSidenavClose()">
-		<mat-icon>login</mat-icon> 
+		<mat-icon>login</mat-icon>
 		<span class="nav-caption"> Iniciar Sesión</span>
 	</a>
 
-	<!-- <a mat-list-item 
-		*ngIf="auth.usuario.name"
-		routerLink="/perfil" 
+	<!-- <a mat-list-item
+		*ngIf="auth.user.name"
+		routerLink="/perfil"
 		(click)="onSidenavClose()">
-		<mat-icon>manage_accounts</mat-icon> 
+		<mat-icon>manage_accounts</mat-icon>
 		<span class="nav-caption"> Mi perfil</span>
 	</a> -->
 
-	<a mat-list-item 
-		*ngIf="auth.usuario.name"
-		routerLink="/inicio" 
+	<a mat-list-item
+		*ngIf="auth.user.name"
+		routerLink="/inicio"
 		(click)="logout()"
 		(click)="onSidenavClose()">
-		<mat-icon>logout</mat-icon> 
+		<mat-icon>logout</mat-icon>
 		<span class="nav-caption"> Cerrar Sesión</span>
 	</a>
 

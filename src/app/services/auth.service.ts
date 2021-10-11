@@ -3,6 +3,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +13,21 @@ import { User } from 'src/app/models/user';
 export class AuthService {
 
   public userData!:Observable<firebase.User| null | undefined>
-  public usuario: User = new User();
+  public user: User = new User();
 
-  constructor(public auth: AngularFireAuth) {
-    
+  constructor(
+    public auth: AngularFireAuth,
+    private firestore: AngularFirestore) {
+
     this.userData = auth.authState;
-    this.auth.authState.subscribe(user =>{
-      if (user) {
-        this.usuario.name = user.displayName;
-        this.usuario.email = user.email;
-        this.usuario.photo = user.photoURL;
-        this.usuario.uid = user.uid;
-
-        console.log("si escribe usuario logeado")
-      }else{
-        console.log("no hay usuario logeado")
-      }
-    });
+    this.auth.authState.subscribe(User =>{
+      if (User) {
+        this.user.name = User.displayName;
+        this.user.email = User.email;
+        this.user.photo = User.photoURL;
+        this.user.uid = User.uid;
+      };
+       });
 
    }
 
@@ -40,4 +41,6 @@ export class AuthService {
     this.auth.signOut();
     window.location.reload();
   }
+
+
 }
