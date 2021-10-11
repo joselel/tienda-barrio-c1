@@ -6,11 +6,11 @@
 		<span class="nav-caption"> Inicio</span>
 	</a>
 
-	<a mat-list-item routerLink="/categorias"
+	<!-- <a mat-list-item routerLink="/categorias"
 		(click)="onSidenavClose()">
 		<mat-icon>category</mat-icon>
 		<span class="nav-caption"> Categorias</span>
-	</a>
+	</a> -->
 	<a mat-list-item
 		*ngIf="auth.user.name"
 		routerLink="/mis-pedidos"
