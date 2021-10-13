@@ -98,7 +98,7 @@ export class CartShoppingComponent implements OnInit {
       this._cartService.total.emit(this.total);
   }
 
-  async postOrder(products:any){
+  async postOrder(products:any, adress:string){
     if(
       this.auth.user.name != undefined || this.auth.user.name != null ||
       this.auth.user.email != undefined || this.auth.user.email != null ||
@@ -111,7 +111,7 @@ export class CartShoppingComponent implements OnInit {
           FechaInicio:new Date(),
           FechaEntrega:new Date(),
           Cliente: this.auth.user.name,
-          Direccion:"casa Z-20",
+          Direccion:adress,
           estado:"Recibido",
           total: this.total
         }
@@ -132,8 +132,34 @@ export class CartShoppingComponent implements OnInit {
 
   }
 
+  async confirmAdressAndOrder(products:any){
+    const { value: direccion } = await Swal.fire({
+      input: 'text',
+      inputLabel: 'Ingresa la direccion de envio:',
+      inputPlaceholder: 'Escribe tu direccion aquí...',
+      inputAttributes: {
+        'minlength':'8',
+        'maxlength':'250',
+        'aria-label': 'Escribe tu mensaje'},
+      title: 'Confirmación de pedido',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    })
+    if(direccion){
+      if(direccion.length >= 8 && direccion.length <= 300){
+        this.postOrder(products, direccion);
+      }else{
+        this.errorNotification('La dirección debe tener mas de 20 caracteres y menos de 300','Error');
+      }
+    }else{
+      this.errorNotification('Debes colocar la dirección de envío','Error');
+    }
+  }
+
   errorNotification(mensaje:string, title:string){
-    Swal.fire({
+     Swal.fire({
       title: title,
       text: mensaje,
       icon: 'error',

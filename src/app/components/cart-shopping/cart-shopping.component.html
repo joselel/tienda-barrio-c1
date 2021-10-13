@@ -53,16 +53,9 @@
 
   <div *ngIf="products.length > 0" class="row shadow-lg p-2 text-center">
 
-    <button
-
-    class="text-center btn btn-primary mb-4 col-md-12"
-    [swal]="{
-      title: '¿Desear realizar el pedido?',
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar' }"
-      (confirm)="postOrder(this.products)">
+    <button class="btn btn-primary"
+    (click)="confirmAdressAndOrder(this.products)"
+      >
     Realizar pedido
     </button>
   </div>
