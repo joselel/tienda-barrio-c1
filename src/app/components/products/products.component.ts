@@ -9,10 +9,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-  
+
 export class ProductsComponent implements OnInit {
 
-  load: boolean; 
+  load: boolean;
   products: any[] = [];
   filtro_valor = '';
   pageActual: number = 1;
@@ -28,11 +28,13 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.PruebaSubscription = this._productsService.getProducts().subscribe(data => {
       this.products = [];
-      data.forEach((element: any) => {    
+      data.forEach((element: any) => {
         this.products.push({
         id: element.payload.doc.id,
         ...element.payload.doc.data()
       })
+
+      console.log(this.products)
     });
     this.load = false;
   });
@@ -54,7 +56,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  addCart(product:product) 
+  addCart(product:product)
   {
     this._cartService.addProductCartShopping(product,1);
   }

@@ -10,19 +10,19 @@
 					<h2 class="card-title text-center">{{item.name}}</h2>
 				</div>
 
-				<img 
-					src="{{item.image}}" 
-					class="card-img-top"
-					alt="IMG-Producto">
+                <img
+                src="{{item.image.urlImg}}"
+                class="card-img-top"
+                alt="IMG-Producto">
 
 				<div class="card-body text-center">
 					<p class="card-text"><b>Q{{item.price_sale.toFixed(2)}}</b></p>
 				</div>
-		
+
 				<div class="text-center mb-3">
-					<button 
+					<button
 						mat-fab color="primary"
-						matTooltip="agregar producto al carrito" 
+						matTooltip="agregar producto al carrito"
 						type="button"
 						(click)="addCart(item)">
 						<mat-icon>add_shopping_cart</mat-icon>
@@ -30,13 +30,14 @@
 				</div>
 				<div class="card-footer text-center">
 					<span>
-						<i>vence en {{item.expiration_date.toDate () | date: 'dd MMM yyyy'}}</i></span>
+						<i *ngIf="!item.expiration_date || item.expiration_date == null || item.expiration_date == ''">Sin fecha de vencimiento</i>
+            <i *ngIf="item.expiration_date">vence en {{item.expiration_date.toDate () | date: 'dd MMM yyyy'}}</i></span>
 				</div>
 			</div>
 		</div>
-		<pagination-controls 
-			class="text-center" 
-			(pageChange)="pageActual = $event" 
+		<pagination-controls
+			class="text-center"
+			(pageChange)="pageActual = $event"
 			previousLabel="Anterior"
 			nextLabel="Siguiente">
 		</pagination-controls>
